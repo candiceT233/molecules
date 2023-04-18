@@ -470,6 +470,9 @@ class AAE3d(object):
             return device, device, device
 
         if not torch.cuda.is_available():
+            device = torch.device(cpu)
+            if device:
+                return device, device, device
             raise ValueError("Specified GPU training but CUDA is not available.")
 
         if isinstance(gpu, int):
